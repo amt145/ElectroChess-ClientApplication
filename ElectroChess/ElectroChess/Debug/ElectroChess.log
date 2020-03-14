@@ -1,0 +1,8 @@
+﻿  Game.cpp
+C:\Users\Alex\Documents\School\sp20\SDP\ConsoleAPI\Backup\build\ElectroChess\ElectroChess\ElectroChess\Board.h(19): warning C4091: 'static ': ignored on left of 'const Board::BoardDims' when no variable is declared
+C:\Users\Alex\Documents\School\sp20\SDP\ConsoleAPI\Backup\build\ElectroChess\ElectroChess\ElectroChess\Game.cpp(142,21): warning C4101: 'tmpVal': unreferenced local variable
+C:\Users\Alex\Documents\School\sp20\SDP\ConsoleAPI\Backup\build\ElectroChess\ElectroChess\ElectroChess\Game.cpp(176,28): warning C4267: 'argument': conversion from 'size_t' to 'uint8_t', possible loss of data
+C:\Users\Alex\Documents\School\sp20\SDP\ConsoleAPI\Backup\build\ElectroChess\ElectroChess\ElectroChess\Game.cpp(185,41): warning C4267: 'argument': conversion from 'size_t' to 'uint8_t', possible loss of data
+C:\Users\Alex\Documents\School\sp20\SDP\ConsoleAPI\Backup\build\ElectroChess\ElectroChess\ElectroChess\Game.cpp(555,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Alex\Documents\School\sp20\SDP\ConsoleAPI\Backup\build\ElectroChess\ElectroChess\ElectroChess\Game.cpp(520): warning C4715: 'Game::EnPassant': not all control paths return a value
+  ElectroChess.vcxproj -> C:\Users\Alex\Documents\School\sp20\SDP\ConsoleAPI\Backup\build\ElectroChess\ElectroChess\Debug\ElectroChess.exe
