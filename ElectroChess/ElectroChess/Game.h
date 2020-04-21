@@ -97,6 +97,7 @@ private:
 	};
 
 public:
+	// Game object constructors
 	Game(int w, int h);
 	Game(int dim);
 	Game();
@@ -108,44 +109,96 @@ public:
 		}
 		CloseHandle(hComm);
 	};
+
+
 	HANDLE GetWindowOutputHandle() const;
+	
+	// Initialize Game object within constructor
 	void Init();
 
+	// Initialize win32 serial port
 	void InitComms();
+
+	// Write to serial port
 	void BufferPut(uint8_t c);
+
+	// Read serial port
 	uint8_t BufferGet();
+
 	bool BufferEmpty() { return bufEmpty; };
+	
+	// Translate FT buffer to character command to be passed into MovePiece
 	std::string RXBufferToCMD();
 	
+	// Construct an FT buffer and send over serial port using Fast Transfer protocol
 	void SendMove(int16_t* moveBuffer);
+
+	// Translates a particular move into an FT buffer
 	int16_t* BuildMoveBuffer(COORD src, COORD dest, int ts, int td);
+	
+	// Send move consisting of impossible sentinel values to indicate something went wrong
 	void SendErrorMove();
 
+	// En Passant move is handled in a separate function since it must be checked and carried out more than once
 	bool EnPassant(std::vector<Player*>& players, Player& player, COORD p1, COORD p2);
-	//void CheckKing(std::vector<Piece*>::iterator& playerPieces, std::vector<Piece*>::iterator& otherPieces, std::vector<COORD>::iterator& capturePattern, COORD otherKCoord);
 
+	// Checks and updates the status of the moving player's king at the end of the move
 	void CheckKing(std::vector<Player*>& players, Player& player, COORD dest);
 
+	// Initialize player objects
 	void InitPlayers();
+
+	// Update the game's structures at the end of a round
 	void Update();
+
+	// Use the window member object to update the board
 	void UpdateBoard();
+
+	// The pawn promotion process is complicated so the procedure is handled in a function
 	void Promote(Player& player, COORD pos);
+
+	// Main game loop
 	int Run();
+
+	// Wraps the concept of a round of chess in a separate function. It is used to 
+	// start the round by receiving player input and finish up the round by updating
+	// game member objects
 	void Turn();
+
+	// Translates a chess move in algebraic notation to a set of square space coordinates
 	COORD TranslateCommandCoords(std::string str);
+
+	// Primary function to move a player's piece given a chess move in algebraic notation
 	bool MovePiece(Player& player, std::string command);
+
+	// Rudimentary pause function
 	void Pause() { int i = getchar(); };
 private:
+	// Fast Transfer structure for communication between the board and client application
 	FastTransfer ft;
+
+	// Used to send a move to the board in a single line
 	int16_t moveBuffer[MOVE_SZ];
 
+	// Communications handle
 	HANDLE hComm;
+
+	// Used in the embedded Fast Transfer class
 	DWORD bytes;
 	bool bufEmpty;
+
+	// Round number
 	int round;
+
+	// End game condition
 	bool gameOver;
+
+	// Board class object
 	Board* board;
+
+	// Window class object
 	Window* window;
+
+	// List of player objects
 	std::vector<Player*> players;
-	std::vector<Piece> piecesInPlay;
 };

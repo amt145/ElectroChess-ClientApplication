@@ -148,7 +148,6 @@
     <ClInclude Include="..\FastTransferPlusPlus\parser.h" />
     <ClInclude Include="Bishop.h" />
     <ClInclude Include="Board.h" />
-    <ClInclude Include="Comms.h" />
     <ClInclude Include="ElectroWin.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="King.h" />
@@ -157,9 +156,7 @@
     <ClInclude Include="Piece.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Queen.h" />
-    <ClInclude Include="Rect.h" />
     <ClInclude Include="Rook.h" />
-    <ClInclude Include="Vec2.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

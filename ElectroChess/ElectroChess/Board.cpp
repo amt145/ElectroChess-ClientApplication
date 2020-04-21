@@ -1,6 +1,12 @@
 #include "Board.h"
 
+/*
+	Board implementation file.
+	In the Windows' console, the height of a particular character is twice its width,
+	so the width of each space is double with respect to its height, so the board and its spaces are all square.
+*/
 
+// The default Board constructor initializes the space dimensions as 3x3 (2*3x3) characters
 Board::Board()
 	:
 	spaceW(2 * 3),
@@ -9,7 +15,7 @@ Board::Board()
 	boardHeight(8 * 3),
 	boardArea({ 0, 0, 2 * 3 * 8, 3 * 8 })
 {
-	//grid = new std::vector<std::vector<Space>>;
+	// Construct the grid of alternating-color spaces for the board
 	bool white = true;
 	for (int i = 1; i < 9; i++) {
 		grid.push_back({});
@@ -25,6 +31,7 @@ Board::Board()
 				white = true;
 			}
 		}
+		// Ternary operation does not work here
 		if (white)
 			white = false;
 		else
@@ -32,6 +39,7 @@ Board::Board()
 	}
 };
 
+// Creates a board of arbitrarily-sized spaces
 Board::Board(short spaceWidth, short spaceHeight)
 	: spaceW(2 * spaceWidth),
 	spaceH(spaceHeight),
@@ -61,6 +69,7 @@ Board::Board(short spaceWidth, short spaceHeight)
 	}
 };
 
+// Destructor
 Board::~Board() {
 	for (int i = 0; i < 8; i++) {
 		for (int j = 0; j < 8; j++) {
@@ -69,7 +78,7 @@ Board::~Board() {
 	}
 }
 
-
+// Remove piece simply places a filler character of appropriate color in place of the occupying piece's character
 void Board::Space::RemovePiece() {
 	if (spaceColor == Board::COLOR::WHITE)
 		Place((char)0xff, Board::COLOR::WHITE);
@@ -77,6 +86,7 @@ void Board::Space::RemovePiece() {
 		Place((char)0xdb, Board::COLOR::BLACK);
 }
 
+// Place sets the center character of a space and occupies it if the parameter is not a filler character
 void Board::Space::Place(char p, Board::COLOR c) {
 	if (p != (char)0xdb && p != (char)0xff)
 	{
@@ -111,6 +121,7 @@ void Board::Space::Place(char p, Board::COLOR c) {
 	}
 }
 
+// Places all pieces in their initial positions on the board
 void Board::Populate(Board::COLOR p2C, Board::COLOR p1C) {
 	// Populate black pieces
 	grid[0][0]->Place('R', p2C);

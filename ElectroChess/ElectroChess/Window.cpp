@@ -1,5 +1,7 @@
 #pragma once
 #include "Window.h"
+
+// Some friendly reminders
 // SMALL_RECT==={LEFT,TOP,RIGHT,BOTTOM}
 // SMALL_RECT==={top_left.x, top_left.y, bottom_right.x, bottom_right.y}
 
@@ -27,13 +29,13 @@ namespace ConsoleForeground
 }
 */
 
+
 Window::Window(int w, int h)
 	:
 	Board(w, h),
 	width(GetBoardWidth() + GetSpaceWidth()),
 	height(GetBoardHeight() + 2 * GetSpaceHeight()),
 	windowRect({ short(0), short(0), short(width), short(height) }),
-	//bufferSize({ short(GetBoardWidth()+GetSpaceWidth()), short((GetBoardHeight() + 2*GetSpaceHeight() + 1)) }),
 	leftMarginBufferH(GetBoardHeight()),
 	leftMarginBufferW(GetSpaceWidth()),
 	leftMarginBufferBox({ 0, 0, short(GetSpaceWidth()), short(GetBoardHeight()) }),
@@ -41,37 +43,47 @@ Window::Window(int w, int h)
 	bottomMarginBufferW(GetBoardWidth()),
 	bottomMarginBufferBox({ short(GetSpaceWidth()), short(GetBoardHeight()), short(GetBoardWidth() + GetSpaceWidth()), short(GetBoardHeight() + GetSpaceHeight()) }),
 	textBufferW(GetBoardWidth() + leftMarginBufferW),
-	//textBufferW(GetBoardWidth()),
 	textBufferH(GetSpaceHeight() + 1),
-	//textBufferH(6),
-	//textBufferBox({ 1, short(GetBoardHeight() + 2), short(GetBoardWidth()), short((GetBoardHeight() + 2) * textBufferH) }),
-	//textBufferBox({ short(leftMarginBufferW), short(GetBoardHeight() + bottomMarginBufferH), short(GetBoardWidth() + leftMarginBufferW), short(GetBoardHeight() + bottomMarginBufferH + textBufferH) }),
 	textBufferBox({ short(leftMarginBufferW), short(GetBoardHeight() + bottomMarginBufferH), short(GetBoardWidth() + leftMarginBufferW), short(GetBoardHeight() + bottomMarginBufferH + textBufferH) }),
 	consoleBufferWidth(GetBoardWidth() + leftMarginBufferW),
 	consoleBufferHeight(GetBoardHeight() + bottomMarginBufferH + textBufferH),
 	bufferSize({ short(consoleBufferWidth), short(consoleBufferHeight) }),
 	bufferRect({ short(0), short(0), bufferSize.X, bufferSize.Y }),
-	//cursor({ 0, short(GetBoardHeight() + 2) }),
-	cursor({ textBufferBox.Left, textBufferBox.Top })//,
-	//hOut(GetStdHandle(STD_OUTPUT_HANDLE)),
-	//hIn(GetStdHandle(STD_INPUT_HANDLE)),
-	//hWnd(GetConsoleWindow())
+	cursor({ textBufferBox.Left, textBufferBox.Top })
 {
 	hOut = GetStdHandle(STD_OUTPUT_HANDLE);
 	hIn = GetStdHandle(STD_INPUT_HANDLE);
 	hWnd = GetConsoleWindow();
+
+	// Win32 console API structure used to initialize the screen buffer
 	CONSOLE_SCREEN_BUFFER_INFO sbi;
+
 	GetConsoleScreenBufferInfo(hOut, &sbi);
+	
+	// Set the screen buffer size to the maximum window size for easy expansion of the board (wasteful but simple)
 	SetConsoleScreenBufferSize(hOut, { sbi.dwMaximumWindowSize.X, sbi.dwMaximumWindowSize.Y } );
+
 	SetConsoleWindowInfo(hOut, true, &windowRect);
+	
+	// Used to force the console window to a specific size but was ultimately abandoned
 	//SetWindowLong(hWnd, GWL_STYLE, GetWindowLong(hWnd, GWL_STYLE) & ~WS_MAXIMIZEBOX & ~WS_SIZEBOX);
+
+	// Dynamically allocate memory for the screen buffer with a length equivalent to the buffer's effective character space area
 	consoleBuffer = new CHAR_INFO[(int)bufferSize.X * (int)bufferSize.Y];
-	textBuffer = new CHAR_INFO[GetBoardWidth() * textBufferH];
-	leftMarginBuffer = new CHAR_INFO[GetBoardHeight() * leftMarginBufferW];
-	bottomMarginBuffer = new CHAR_INFO[GetBoardWidth() * bottomMarginBufferH];
+
+	//textBuffer = new CHAR_INFO[GetBoardWidth() * textBufferH];
+	//leftMarginBuffer = new CHAR_INFO[GetBoardHeight() * leftMarginBufferW];
+	//bottomMarginBuffer = new CHAR_INFO[GetBoardWidth() * bottomMarginBufferH];
+
 	SetConsoleTitle("Electro-Chess");
+
+	// Remove the window's ugly scroll bar
 	ShowScrollBar(hWnd, SB_BOTH, FALSE);
+
+	// Initialize cursor position
 	ResetCursor();
+
+	// Initialize screen buffer
 	RefreshConsoleBuffer();
 }
 
@@ -196,6 +208,7 @@ void Window::UpdateConsoleBuffer() {
 	}
 }
 
+// Windows-side console pseudo message pump
 bool Window::ProcessMessages() {
 	DWORD numEvents = 0;
 	GetNumberOfConsoleInputEvents(hIn, &numEvents);
@@ -204,6 +217,12 @@ bool Window::ProcessMessages() {
 		DWORD numEventsRead = 0;
 		INPUT_RECORD* ir = new INPUT_RECORD[numEvents];
 		ReadConsoleInput(hIn, ir, numEvents, &numEventsRead);
+		/* 
+		 * Tried to implement dynamic screen buffer refreshing, but the console window
+		 * was created via the win32 console API, not the win32 API itself, so the
+		 * standard locking console IO functions had to be used, instead of the win32
+		 * API callbacks.
+		 */
 		/*
 		MSG msg = {0};
 		while (PeekMessage(&msg, hWnd, 0, 0, PM_REMOVE)) {

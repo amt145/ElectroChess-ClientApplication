@@ -2,6 +2,10 @@
 #include "ElectroWin.h"
 #include "Board.h"
 
+/*
+	The Piece class serves as a base class for all derived piece classes that represent all different pieces available in chess.
+*/
+
 class Piece
 {
 public:
@@ -33,10 +37,15 @@ public:
 
 	Piece& operator=(const Piece& rhs);
 
+
 	virtual void MoveTo(COORD space) { pos = space; if (!hasMoved) hasMoved = true; moveCounter++; };
+
+	// Each piece has a unique movement pattern and a unique capture pattern, therefore
+	// the functions that deal with the patterns are virtual
 	virtual void SetCurrentMovePattern(COORD pos, Board& board) {};
 	virtual void SetCurrentCapturePattern(COORD pos, Board& board) { currentCapturePattern = currentMovePattern; };
 
+	// Generic Piece getters and setters
 	Board::COLOR GetColor() const { return color; };
 	TYPE GetType() const { return type; };
 	char GetSymbol() const { return symbol; };
@@ -59,14 +68,36 @@ public:
 	bool operator !=(const Piece& rhs);
 
 protected:
+	// Piece color
 	Board::COLOR color;
+	
+	// Piece type
 	TYPE type;
+	
+	// Piece character symbol
 	char symbol;
+	
+	// 
 	COORD pos;
+	
+	// Piece capture status
 	bool alive;
+
+	// ID of the player the piece belongs to
 	int ownerID;
+
+	// The movement pattern of a pawn changes depending on if the piece
+	// itself has moved before. Further, the capture pattern changes if
+	// a piece it intends on capturing has moved previously, if the piece it
+	// intends on capturing is also a pawn. The possibility of these two states
+	// then must be monitored
 	bool hasMoved;
 	long moveCounter;
+
+	// The move pattern is a list of coordinates in square space on the board to where a piece can move
+	// based on its current position
 	std::vector<COORD> currentMovePattern;
+	// the capture pattern is a list of coordinates in square space on the board to where a piece can
+	// move to during a capture based on its current position
 	std::vector<COORD> currentCapturePattern;
 };

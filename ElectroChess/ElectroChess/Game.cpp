@@ -283,30 +283,39 @@ void Game::InitPlayers() {
 	Beep(550, 200);
 	Beep(650, 200);
 	Beep(550, 200);
+	
+	// The player to go first is determined by a coin toss since the array of player objects is of length 2
 	int coinToss = rand() % 2;
-	//window->SetCursor({ short(0), short(window->GetBoardHeight()) });
 	window->PrintString("Welcome to Electro-Chess.");
-	//Sleep(4000);
 
 	window->ClearTextBuffer();
-	//window->SetCursor({ short(0), short(window->GetBoardHeight()) });
 	players.push_back(new Player("Player", 0, Board::COLOR::WHITE));
 	players.push_back(new Player("Opponent", 1, Board::COLOR::BLACK));
 	players[coinToss]->SetTurn(true);
 	players[!coinToss]->SetTurn(false);
 
+	/*
+		Just like in classic chess, the first player to go has the white pieces.
+		The player that lost the coin toss and goes second, get the black pieces.
+		However, since the win32 console api only offers 16 different colors, 
+		which did not offer colors close to the wood stain colors of a common chess
+		board, a white and light grey were the colors chosen to represent the squares
+		of the board. Therefore, the contrast between the squares and the pieces was
+		so bad that the pieces could not be easily seen. Thus the colors of the pieces
+		were chosen to be white->blue and black->red. The color choice was arbitrary
+		other than the fact that red and blue offered the best contrast.
+	*/
 	if (players[0]->GetColor() == Board::COLOR::WHITE)
 		board->Populate(Board::COLOR::RED, Board::COLOR::BLUE);
 	else
 		board->Populate(Board::COLOR::BLUE, Board::COLOR::RED);
 
 	window->ClearTextBuffer();
-
-
-	//Sleep(5000);
 }
 
+// Main application game loop
 int Game::Run() {
+	// Game loop. While win32 console events are being processed and end game conditions are unmet, continue to update game
 	while (window->ProcessMessages() && !gameOver) {
 		Update();
 	}

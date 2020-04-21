@@ -44,6 +44,7 @@ void Player::RemoveCapturedPiece(Piece* piece) {
 	captured.erase(it);
 }
 
+// Initializes the player's pieces with the appropriate colors, positions, and IDs
 void Player::InitPieces() {
 
 	if (color == Board::COLOR::WHITE)

@@ -74,12 +74,6 @@
     <ClInclude Include="ElectroWin.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Vec2.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Rect.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Board.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -109,9 +103,6 @@
     </ClInclude>
     <ClInclude Include="Queen.h">
       <Filter>Pieces</Filter>
-    </ClInclude>
-    <ClInclude Include="Comms.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\FastTransferPlusPlus\buffer.h">
       <Filter>FastTransfer</Filter>
