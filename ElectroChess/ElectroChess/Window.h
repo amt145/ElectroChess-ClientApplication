@@ -23,7 +23,6 @@ class Window : public Board
 public:
 	Window(int w, int h);
 	~Window() { delete[] consoleBuffer; };
-	//~Window() { delete[] consoleBuffer; delete[] textBuffer; delete[] leftMarginBuffer; delete[] bottomMarginBuffer; };
 
 	// Write the contents of the screen buffer to the output handle
 	void PrintBoard();
@@ -170,25 +169,19 @@ private:
 		The text buffer displays prompts to the player, reads information from the player, 
 		as well as relays information about actions performed by the opponent.
 	*/
+
 	// Rect that represents the outline of the text buffer.
 	// It has character space dimensions of (width of board)x(height of space + 1)
 	SMALL_RECT textBufferBox;
-#if 0
-	//CHAR_INFO* textBuffer;
-#endif
 
 	// The left margin buffer is used to display the row numbers of the game board
 	// It has character space dimensions of (width of space)x(height of board)
 	SMALL_RECT leftMarginBufferBox;
-#if 0
-	//CHAR_INFO* leftMarginBuffer;
-#endif
+
 	// The bottom margin buffer is used to display the file letters of the game board.
 	// It has character space dimensions of (width of board)x(height of space)
 	SMALL_RECT bottomMarginBufferBox;
-#if 0
-	//CHAR_INFO* bottomMarginBuffer;
-#endif
+
 	// Stores the character space coordinates of the position of cursor
 	COORD cursor;
 };

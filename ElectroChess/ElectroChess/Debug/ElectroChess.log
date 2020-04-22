@@ -1,11 +1,55 @@
-﻿  Game.cpp
-C:\Users\Alex\Documents\GitHub\ElectroChess-ClientApplication\ElectroChess\ElectroChess\Board.h(22): warning C4091: 'static ': ignored on left of 'const Board::BoardDims' when no variable is declared
-C:\Users\Alex\Documents\GitHub\ElectroChess-ClientApplication\ElectroChess\ElectroChess\Game.cpp(175,21): warning C4101: 'tmpVal': unreferenced local variable
-C:\Users\Alex\Documents\GitHub\ElectroChess-ClientApplication\ElectroChess\ElectroChess\Game.cpp(209,28): warning C4267: 'argument': conversion from 'size_t' to 'uint8_t', possible loss of data
-C:\Users\Alex\Documents\GitHub\ElectroChess-ClientApplication\ElectroChess\ElectroChess\Game.cpp(218,41): warning C4267: 'argument': conversion from 'size_t' to 'uint8_t', possible loss of data
-C:\Users\Alex\Documents\GitHub\ElectroChess-ClientApplication\ElectroChess\ElectroChess\Game.cpp(597,21): warning C4018: '<': signed/unsigned mismatch
+﻿  Bishop.cpp
+C:\Users\Alex\Documents\GitHub\ElectroChess-ClientApplication\ElectroChess\ElectroChess\Board.h(27): warning C4091: 'static ': ignored on left of 'const Board::BoardDims' when no variable is declared
+  Board.cpp
+C:\Users\Alex\Documents\GitHub\ElectroChess-ClientApplication\ElectroChess\ElectroChess\Board.h(27): warning C4091: 'static ': ignored on left of 'const Board::BoardDims' when no variable is declared
+C:\Users\Alex\Documents\GitHub\ElectroChess-ClientApplication\ElectroChess\ElectroChess\Board.cpp(31,135): warning C4309: 'argument': truncation of constant value
+C:\Users\Alex\Documents\GitHub\ElectroChess-ClientApplication\ElectroChess\ElectroChess\Board.cpp(36,135): warning C4309: 'argument': truncation of constant value
+C:\Users\Alex\Documents\GitHub\ElectroChess-ClientApplication\ElectroChess\ElectroChess\Board.cpp(62,155): warning C4309: 'argument': truncation of constant value
+C:\Users\Alex\Documents\GitHub\ElectroChess-ClientApplication\ElectroChess\ElectroChess\Board.cpp(67,155): warning C4309: 'argument': truncation of constant value
+  Game.cpp
+C:\Users\Alex\Documents\GitHub\ElectroChess-ClientApplication\ElectroChess\ElectroChess\Board.h(27): warning C4091: 'static ': ignored on left of 'const Board::BoardDims' when no variable is declared
+C:\Users\Alex\Documents\GitHub\ElectroChess-ClientApplication\ElectroChess\ElectroChess\Game.cpp(176,21): warning C4101: 'tmpVal': unreferenced local variable
+C:\Users\Alex\Documents\GitHub\ElectroChess-ClientApplication\ElectroChess\ElectroChess\Game.cpp(210,28): warning C4267: 'argument': conversion from 'size_t' to 'uint8_t', possible loss of data
+C:\Users\Alex\Documents\GitHub\ElectroChess-ClientApplication\ElectroChess\ElectroChess\Game.cpp(219,41): warning C4267: 'argument': conversion from 'size_t' to 'uint8_t', possible loss of data
+C:\Users\Alex\Documents\GitHub\ElectroChess-ClientApplication\ElectroChess\ElectroChess\Game.cpp(567,21): warning C4018: '<': signed/unsigned mismatch
+  King.cpp
+C:\Users\Alex\Documents\GitHub\ElectroChess-ClientApplication\ElectroChess\ElectroChess\Board.h(27): warning C4091: 'static ': ignored on left of 'const Board::BoardDims' when no variable is declared
+  Knight.cpp
+C:\Users\Alex\Documents\GitHub\ElectroChess-ClientApplication\ElectroChess\ElectroChess\Board.h(27): warning C4091: 'static ': ignored on left of 'const Board::BoardDims' when no variable is declared
+  Pawn.cpp
+C:\Users\Alex\Documents\GitHub\ElectroChess-ClientApplication\ElectroChess\ElectroChess\Board.h(27): warning C4091: 'static ': ignored on left of 'const Board::BoardDims' when no variable is declared
+  Piece.cpp
+C:\Users\Alex\Documents\GitHub\ElectroChess-ClientApplication\ElectroChess\ElectroChess\Board.h(27): warning C4091: 'static ': ignored on left of 'const Board::BoardDims' when no variable is declared
+  Player.cpp
+C:\Users\Alex\Documents\GitHub\ElectroChess-ClientApplication\ElectroChess\ElectroChess\Board.h(27): warning C4091: 'static ': ignored on left of 'const Board::BoardDims' when no variable is declared
+  Queen.cpp
+C:\Users\Alex\Documents\GitHub\ElectroChess-ClientApplication\ElectroChess\ElectroChess\Board.h(27): warning C4091: 'static ': ignored on left of 'const Board::BoardDims' when no variable is declared
+  Rook.cpp
+C:\Users\Alex\Documents\GitHub\ElectroChess-ClientApplication\ElectroChess\ElectroChess\Board.h(27): warning C4091: 'static ': ignored on left of 'const Board::BoardDims' when no variable is declared
+  Window.cpp
+C:\Users\Alex\Documents\GitHub\ElectroChess-ClientApplication\ElectroChess\ElectroChess\Board.h(27): warning C4091: 'static ': ignored on left of 'const Board::BoardDims' when no variable is declared
+C:\Users\Alex\Documents\GitHub\ElectroChess-ClientApplication\ElectroChess\ElectroChess\Window.cpp(117,18): warning C4309: 'argument': truncation of constant value
+C:\Users\Alex\Documents\GitHub\ElectroChess-ClientApplication\ElectroChess\ElectroChess\Window.cpp(128,18): warning C4309: 'argument': truncation of constant value
+C:\Users\Alex\Documents\GitHub\ElectroChess-ClientApplication\ElectroChess\ElectroChess\Window.cpp(154,32): warning C4309: 'argument': truncation of constant value
+C:\Users\Alex\Documents\GitHub\ElectroChess-ClientApplication\ElectroChess\ElectroChess\Window.cpp(160,32): warning C4309: 'argument': truncation of constant value
+C:\Users\Alex\Documents\GitHub\ElectroChess-ClientApplication\ElectroChess\ElectroChess\Window.cpp(166,32): warning C4309: 'argument': truncation of constant value
+C:\Users\Alex\Documents\GitHub\ElectroChess-ClientApplication\ElectroChess\ElectroChess\Window.cpp(261,24): warning C4309: 'argument': truncation of constant value
+C:\Users\Alex\Documents\GitHub\ElectroChess-ClientApplication\ElectroChess\ElectroChess\Window.cpp(268,17): warning C4309: 'argument': truncation of constant value
+C:\Users\Alex\Documents\GitHub\ElectroChess-ClientApplication\ElectroChess\ElectroChess\Window.cpp(272,51): warning C4018: '>': signed/unsigned mismatch
+C:\Users\Alex\Documents\GitHub\ElectroChess-ClientApplication\ElectroChess\ElectroChess\Window.cpp(288,52): warning C4018: '>': signed/unsigned mismatch
+C:\Users\Alex\Documents\GitHub\ElectroChess-ClientApplication\ElectroChess\ElectroChess\Window.cpp(296,34): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Alex\Documents\GitHub\ElectroChess-ClientApplication\ElectroChess\ElectroChess\Window.cpp(303,27): warning C4018: '>': signed/unsigned mismatch
+C:\Users\Alex\Documents\GitHub\ElectroChess-ClientApplication\ElectroChess\ElectroChess\Window.cpp(317,32): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Alex\Documents\GitHub\ElectroChess-ClientApplication\ElectroChess\ElectroChess\Window.cpp(324,30): warning C4018: '>': signed/unsigned mismatch
+C:\Users\Alex\Documents\GitHub\ElectroChess-ClientApplication\ElectroChess\ElectroChess\Window.cpp(332,34): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Alex\Documents\GitHub\ElectroChess-ClientApplication\ElectroChess\ElectroChess\Window.cpp(345,29): warning C4018: '>': signed/unsigned mismatch
+C:\Users\Alex\Documents\GitHub\ElectroChess-ClientApplication\ElectroChess\ElectroChess\Window.cpp(353,34): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Alex\Documents\GitHub\ElectroChess-ClientApplication\ElectroChess\ElectroChess\Window.cpp(367,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Alex\Documents\GitHub\ElectroChess-ClientApplication\ElectroChess\ElectroChess\Window.cpp(396,18): warning C4309: 'argument': truncation of constant value
   main.cpp
-C:\Users\Alex\Documents\GitHub\ElectroChess-ClientApplication\ElectroChess\ElectroChess\Board.h(22): warning C4091: 'static ': ignored on left of 'const Board::BoardDims' when no variable is declared
+C:\Users\Alex\Documents\GitHub\ElectroChess-ClientApplication\ElectroChess\ElectroChess\Board.h(27): warning C4091: 'static ': ignored on left of 'const Board::BoardDims' when no variable is declared
   Generating Code...
-C:\Users\Alex\Documents\GitHub\ElectroChess-ClientApplication\ElectroChess\ElectroChess\Game.cpp(562): warning C4715: 'Game::EnPassant': not all control paths return a value
+C:\Users\Alex\Documents\GitHub\ElectroChess-ClientApplication\ElectroChess\ElectroChess\Window.cpp(390): warning C4172: returning address of local variable or temporary: buf
+C:\Users\Alex\Documents\GitHub\ElectroChess-ClientApplication\ElectroChess\ElectroChess\Player.cpp(99): warning C4715: 'Player::IsCheck': not all control paths return a value
+C:\Users\Alex\Documents\GitHub\ElectroChess-ClientApplication\ElectroChess\ElectroChess\Game.cpp(532): warning C4715: 'Game::EnPassant': not all control paths return a value
   ElectroChess.vcxproj -> C:\Users\Alex\Documents\GitHub\ElectroChess-ClientApplication\ElectroChess\Debug\ElectroChess.exe

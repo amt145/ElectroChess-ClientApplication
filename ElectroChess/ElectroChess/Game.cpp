@@ -4,20 +4,14 @@
 	Last Revision Date: 04/24/2020
 */
 
-
-//{p,r,n,b,q,k}=={1,2,3,4,5,6}
+// Fast Transfer piece IDs
+// {p,r,n,b,q,k}=={1,2,3,4,5,6}
 
 #pragma once
 #include "Game.h"
 #define BOARD_ADDR 6
 #define CLIENT_ADDR 0
 #define FT_MOVE_UNIT_LENGTH 6
-#define C_DEBUG
-//#define B_DEBUG
-//#define CB_DEBUG
-//#define RELEASE
-
-
 
 
 Game::Game(int w, int h) : round(0), gameOver(false), ft(this, 0), hComm(NULL) {
@@ -251,38 +245,10 @@ uint8_t Game::BufferGet() {
 }
 
 std::string Game::RXBufferToCMD() {
-	//const Buffer_t b = ft.GetBuffer();
 	std::vector<uint16_t> v;
 	std::string s;
 	char type = 'e';
-	//if (Buffer_empty(ft.GetBuffer()))
-	//	return std::string("-1");
-	/*
-	if (Buffer_size(ft.GetBuffer()) > FT_MOVE_UNIT_LENGTH)
-	{
-		for (int i = 0; i < Buffer_size(ft.GetBuffer()); ++i) {
-			//v.push_back(Buffer_get(&ft.GetBuffer(), i));
-			v.push_back(ft.FT_Read(i));
-		}
-		// if king at (4,0)->(6,0) and rook at (7,0)->(5,0), or vice-versa => kingside castle
-		if ((v[0] == 4 && v[1] == 0 && v[2] == 6 && v[3] == 6 && v[4] == 0 && v[5] == 6
-			&& v[6] == 7 && v[7] == 0 && v[8] == 2 && v[9] == 5 && v[10] == 0 && v[11] == 2)
-			|| (v[0] == 7 && v[1] == 0 && v[2] == 2 && v[3] == 5 && v[4] == 0 && v[5] == 2
-				&& v[6] == 4 && v[7] == 0 && v[8] == 6 && v[9] == 6 && v[10] == 0 && v[11] == 6))
-			s = "00";
-		// if king at (4,0)->(2,0) and rook at (0,0)->(3,0), or vice-versa => queenside castle
-		else if ((v[0] == 4 && v[1] == 0 && v[2] == 6 && v[3] == 2 && v[4] == 0 && v[5] == 6
-			&& v[6] == 0 && v[7] == 0 && v[8] == 2 && v[9] == 3 && v[10] == 0 && v[11] == 2)
-			|| (v[0] == 0 && v[1] == 0 && v[2] == 2 && v[3] == 3 && v[4] == 0 && v[5] == 2
-				&& v[6] == 4 && v[7] == 0 && v[8] == 6 && v[9] == 2 && v[10] == 0 && v[11] == 6))
-			s = "000";
-	}
-	*/
-	//else
-	//{
-		//for (int i = 0; i < Buffer_size(&ft.GetBuffer()); ++i) {
 		for (int i = 0; i < ARRAY_SZ/2+1; ++i) {
-			//v.push_back(Buffer_get(&ft.GetBuffer(), i));
 			v.push_back(ft.FT_Read(i));
 		}
 		switch (v[3])
@@ -312,10 +278,7 @@ std::string Game::RXBufferToCMD() {
 		s.push_back(' ');
 		s.push_back(char(v[4] + 65));
 		s.push_back(char(v[5] + 48));
-	//}
 	return s;
-	//*/
-	//return s;
 }
 
 void Game::InitPlayers() {
@@ -327,7 +290,7 @@ void Game::InitPlayers() {
 	// The player to go first is determined by a coin toss since the array of player objects is of length 2
 	int coinToss = rand() % 2;
 	window->PrintString("Welcome to Electro-Chess.");
-
+	Sleep(4500);
 	window->ClearTextBuffer();
 	players.push_back(new Player("Player", 0, Board::COLOR::WHITE));
 	players.push_back(new Player("Opponent", 1, Board::COLOR::BLACK));
@@ -919,9 +882,6 @@ bool Game::MovePiece(Player& player, std::string command) {
 				}
 				else
 				{
-//#ifndef C_DEBUG
-//					SendMove(BuildMoveBuffer(p1, p2, 1, 1));
-//#endif
 					promoting = false;
 				}
 			}
@@ -940,9 +900,6 @@ bool Game::MovePiece(Player& player, std::string command) {
 				}
 				else
 				{
-//#ifdef CB_DEBUG
-//					SendMove(BuildMoveBuffer(p1, p2, 1, 1));
-//#endif
 					promoting = false;
 				}
 			}
@@ -1486,7 +1443,7 @@ void Game::Turn() {
 			window->ClearTextBuffer();
 			window->PrintLine("For example, to move your pawn at A2 to A3,");
 			window->PrintLine("type: \"PA2 A3\".");
-			Sleep(5000)
+			Sleep(5000);
 		}
 #endif
 		std::string command;
@@ -1495,20 +1452,8 @@ void Game::Turn() {
 			window->ClearTextBuffer();
 			window->PrintString("Player 1, enter your move command here: ");
 			command = window->GetString();
-
 			if (!MovePiece(*players[0], command))
 			{
-				/*
-				if (players[0]->IsCheck())
-				{
-					window->ClearTextBuffer();
-					window->PrintLine("Your king is in check.");
-					window->PrintLine("You must move your king out of check.");
-					Sleep(2000);
-					window->ClearTextBuffer();
-					valid = false;
-				}
-				*/
 				window->ClearTextBuffer();
 				window->PrintLine("Invalid move.");
 				Sleep(2000);
@@ -1525,10 +1470,12 @@ void Game::Turn() {
 	{
 		std::string command;
 		bool valid = true;
+#ifndef C_DEBUG
 		window->PrintLine("It's your opponent's turn.");
 		Sleep(1000);
+#endif
 		window->ClearTextBuffer();
-#ifndef C_DEBUG
+#if !defined(C_DEBUG) && !defined(CB_DEBUG)
 		window->PrintLine("Please wait for your opponent's move.");
 #endif
 		do {
@@ -1545,32 +1492,13 @@ void Game::Turn() {
 #endif
 			if (!MovePiece(*players[1], command))
 			{
-#if defined(B_DEBUG) || defined(CB_DEBUG)
-				/*
-				if (players[0]->IsCheck())
-				{
-					window->ClearTextBuffer();
-					window->PrintLine("Your king is in check.");
-					window->PrintLine("You must move your king out of check.");
-					Sleep(2000);
-					window->ClearTextBuffer();
-					valid = false;
-				}
-				*/
+#if defined(C_DEBUG) || defined(B_DEBUG) || defined(CB_DEBUG)
 				window->ClearTextBuffer();
 				window->PrintLine("Invalid Move");
 #endif
-#if !defined(C_DEBUG) & !defined(CB_DEBUG)
-				ft.FT_ToSend(0, -1);
-				ft.FT_ToSend(1, -1);
-				ft.FT_ToSend(2, -1);
-				ft.FT_ToSend(3, -1);
-				ft.FT_ToSend(4, -1);
-				ft.FT_ToSend(5, -1);
-				ft.FT_Send(BOARD_ADDR);
+#if !defined(C_DEBUG) && !defined(CB_DEBUG)
+				SendErrorMove();
 #endif
-				//Sleep(2000);
-				//window->ClearTextBuffer();
 				valid = false;
 			}
 			else
@@ -1611,27 +1539,6 @@ void Game::Promote(Player& player, COORD pos) {
 				window->ClearTextBuffer();
 				window->PrintString("You cannot promote your pawn to a pawn!");
 				valid = false;
-
-				/*
-				for(; j != player.GetCapturedPieces().end(); ++j) {
-					if ((*j)->GetSymbol() == 'P')
-					{
-						found = true;
-						break;
-					}
-				}
-				if (found)
-				{
-					player.AddPiece(new Pawn(player.GetColor(), { pos.X, pos.Y }, player.GetID()));
-					player.RemovePiece(*i);
-					player.RemoveCapturedPiece(*j);
-					board->Grid()[pos.Y][pos.X]->RemovePiece();
-					board->Grid()[pos.Y][pos.X]->Place('P', player.GetColor());
-					valid = true;
-				}
-				else
-					valid = false;
-				*/
 				break;
 			case 'N':
 			case 'n':
@@ -1773,13 +1680,7 @@ void Game::Promote(Player& player, COORD pos) {
 #ifndef C_DEBUG
 			if (!valid)
 			{
-				ft.FT_ToSend(0, -1);
-				ft.FT_ToSend(1, -1);
-				ft.FT_ToSend(2, -1);
-				ft.FT_ToSend(3, -1);
-				ft.FT_ToSend(4, -1);
-				ft.FT_ToSend(5, -1);
-				ft.FT_Send(BOARD_ADDR);
+				SendErrorMove();
 			}
 
 #ifndef CB_DEBUG
@@ -1791,30 +1692,11 @@ void Game::Promote(Player& player, COORD pos) {
 			{
 			case 'P':
 			case 'p':
+#if defined(C_DEBUG) || defined(CB_DEBUG)
 				window->ClearTextBuffer();
 				window->PrintString("You cannot promote your pawn to a pawn!");
+#endif
 				valid = false;
-
-				/*
-				for(; j != player.GetCapturedPieces().end(); ++j) {
-					if ((*j)->GetSymbol() == 'P')
-					{
-						found = true;
-						break;
-					}
-				}
-				if (found)
-				{
-					player.AddPiece(new Pawn(player.GetColor(), { pos.X, pos.Y }, player.GetID()));
-					player.RemovePiece(*i);
-					player.RemoveCapturedPiece(*j);
-					board->Grid()[pos.Y][pos.X]->RemovePiece();
-					board->Grid()[pos.Y][pos.X]->Place('P', player.GetColor());
-					valid = true;
-				}
-				else
-					valid = false;
-				*/
 				break;
 			case 'N':
 			case 'n':

@@ -49,14 +49,13 @@ Window::Window(int w, int h)
 	SetConsoleWindowInfo(hOut, true, &windowRect);
 	
 	// Used to force the console window to a specific size but was ultimately abandoned
+#if 0
 	//SetWindowLong(hWnd, GWL_STYLE, GetWindowLong(hWnd, GWL_STYLE) & ~WS_MAXIMIZEBOX & ~WS_SIZEBOX);
+#endif
 
 	// Dynamically allocate memory for the screen buffer with a length equivalent to the buffer's effective character space area
 	consoleBuffer = new CHAR_INFO[(int)bufferSize.X * (int)bufferSize.Y];
 
-	//textBuffer = new CHAR_INFO[GetBoardWidth() * textBufferH];
-	//leftMarginBuffer = new CHAR_INFO[GetBoardHeight() * leftMarginBufferW];
-	//bottomMarginBuffer = new CHAR_INFO[GetBoardWidth() * bottomMarginBufferH];
 
 	SetConsoleTitle("Electro-Chess");
 
@@ -206,6 +205,7 @@ bool Window::ProcessMessages() {
 		 * standard locking console IO functions had to be used, instead of the win32
 		 * API callbacks.
 		 */
+#if 0
 		/*
 		MSG msg = {0};
 		while (PeekMessage(&msg, hWnd, 0, 0, PM_REMOVE)) {
@@ -225,6 +225,7 @@ bool Window::ProcessMessages() {
 			break;
 		}
 		*/
+#endif
 		for (DWORD i = 0; i < numEventsRead; i++) {
 			switch (ir[i].EventType)
 			{
