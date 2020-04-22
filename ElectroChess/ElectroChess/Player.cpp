@@ -1,5 +1,10 @@
-#include "Player.h"
+/*
+	File: Player.cpp
+	Author: Alex Turner
+	Last Revision Date: 04/24/2020
+*/
 
+#include "Player.h"
 #include "Pawn.h"
 #include "Rook.h"
 #include "Bishop.h"

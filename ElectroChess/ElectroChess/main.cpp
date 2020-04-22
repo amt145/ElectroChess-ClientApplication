@@ -1,3 +1,9 @@
+/*
+	File: main.cpp
+	Author: Alex Turner
+	Last Revision Date: 04/24/2020
+*/
+
 #include "ElectroWin.h"
 #include "Game.h"
 #include <stdio.h>

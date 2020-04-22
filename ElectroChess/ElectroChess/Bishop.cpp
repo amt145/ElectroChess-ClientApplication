@@ -1,3 +1,9 @@
+/*
+	File: Bishop.cpp
+	Author: Alex Turner
+	Last Revision Date: 04/24/2020
+*/
+
 #include "Bishop.h"
 
 Bishop::Bishop(Board::COLOR c, COORD pos, int player) : Piece('B', Piece::TYPE::BISHOP, c, pos, player) {}

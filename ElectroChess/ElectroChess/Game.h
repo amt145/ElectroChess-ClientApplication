@@ -1,7 +1,5 @@
 #pragma once
 #include "ElectroWin.h"
-
-//#include "../FastTransferPlusPlus/ft.h"
 #include <stdbool.h>
 #include <stdint.h>
 #include "../FastTransferPlusPlus/ft_config.h"
@@ -19,6 +17,7 @@
 #include "Queen.h"
 #include "King.h"
 
+// Number of Fast Transfer ToSend calls sent per move
 #define MOVE_SZ 7
 
 class Game
@@ -118,6 +117,9 @@ public:
 
 	// Initialize win32 serial port
 	void InitComms();
+	
+	// Initialize specified win32 serial port
+	void InitComms(const char* portname);
 
 	// Write to serial port
 	void BufferPut(uint8_t c);

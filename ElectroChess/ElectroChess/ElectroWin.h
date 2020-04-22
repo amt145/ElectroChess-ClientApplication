@@ -1,3 +1,9 @@
+/*
+	File: ElectroWin.h
+	Author: Alex Turner
+	Last Revision Date: 04/24/2020
+*/
+
 // Primary global definitions and includes here
 
 #pragma once

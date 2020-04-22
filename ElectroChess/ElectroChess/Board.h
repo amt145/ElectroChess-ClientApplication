@@ -1,6 +1,11 @@
+/*
+	File: Board.h
+	Author: Alex Turner
+	Last Revision Date: 04/24/2020
+*/
+
 #pragma once
 #include "ElectroWin.h"
-
 /*
 	The Board class handles the OOP high-level logic of the game board.
 */

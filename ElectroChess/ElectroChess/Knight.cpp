@@ -1,3 +1,9 @@
+/*
+	File: Knight.cpp
+	Author: Alex Turner
+	Last Revision Date: 04/24/2020
+*/
+
 #include "Knight.h"
 
 Knight::Knight(Board::COLOR c, COORD pos, int player) : Piece('N', Piece::TYPE::KNIGHT, c, pos, player) {}

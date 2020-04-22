@@ -1,3 +1,9 @@
+/*
+	File: Pawn.cpp
+	Author: Alex Turner
+	Last Revision Date: 04/24/2020
+*/
+
 #include "Pawn.h"
 
 Pawn::Pawn(Board::COLOR c, COORD pos, int player) : Piece('P', Piece::TYPE::PAWN, c, pos, player) {}

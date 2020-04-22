@@ -1,3 +1,9 @@
+/*
+	File: Piece.h
+	Author: Alex Turner
+	Last Revision Date: 04/24/2020
+*/
+
 #pragma once
 #include "ElectroWin.h"
 #include "Board.h"

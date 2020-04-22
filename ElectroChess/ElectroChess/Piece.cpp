@@ -1,3 +1,9 @@
+/*
+	File: Piece.cpp
+	Author: Alex Turner
+	Last Revision Date: 04/24/2020
+*/
+
 #include "Piece.h"
 
 Piece::Piece(char sym, COORD p) : symbol(sym), pos({ p.X, p.Y }), alive(true), hasMoved(false), moveCounter(0) {

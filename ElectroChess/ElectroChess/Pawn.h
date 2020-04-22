@@ -1,3 +1,9 @@
+/*
+	File: Pawn.h
+	Author: Alex Turner
+	Last Revision Date: 04/24/2020
+*/
+
 #pragma once
 #include "Piece.h"
 
@@ -6,7 +12,6 @@ class Pawn : public Piece
 public:
 	Pawn(Board::COLOR c, COORD pos, int player);
 	Pawn(Board::COLOR c, int player);
-	//~Pawn();
 	std::vector<COORD>& GetCurrentMovePattern() { return currentMovePattern; };
 	std::vector<COORD>& GetCurrentCapturePattern() { return currentCapturePattern; };
 	long& MoveCounter() { return moveCounter; };

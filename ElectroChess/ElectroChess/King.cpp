@@ -1,3 +1,9 @@
+/*
+	File: King.cpp
+	Author: Alex Turner
+	Last Revision Date: 04/24/2020
+*/
+
 #include "King.h"
 
 King::King(Board::COLOR c, COORD pos, int player) : Piece('K', Piece::TYPE::KING, c, pos, player), check(false) {}

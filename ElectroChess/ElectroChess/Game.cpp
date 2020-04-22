@@ -1,3 +1,10 @@
+/*
+	File: Game.cpp
+	Author: Alex Turner
+	Last Revision Date: 04/24/2020
+*/
+
+
 //{p,r,n,b,q,k}=={1,2,3,4,5,6}
 
 #pragma once
@@ -51,7 +58,6 @@ void Game::Init() {
 	InitComms();
 #endif
 	InitPlayers();
-	//Run();
 }
 
 void Game::UpdateBoard() {
@@ -67,6 +73,7 @@ void Game::UpdateBoard() {
 void Game::InitComms() {
 	bytes = 0;
 	bufEmpty = true;
+	// If the comms handle has not been created, open default serial port for generic I/O
 	if (hComm == NULL)
 	{
 		hComm = CreateFile("COM6",
@@ -82,6 +89,7 @@ void Game::InitComms() {
 			DWORD err = GetLastError();
 			Pause();
 		}
+		// Setup device control structure to configure comm port for serial communications
 		DCB dcbSerialParams = { 0 };
 		dcbSerialParams.DCBlength = sizeof(dcbSerialParams);
 		GetCommState(hComm, &dcbSerialParams);
@@ -91,21 +99,53 @@ void Game::InitComms() {
 		dcbSerialParams.Parity = NOPARITY;
 		SetCommState(hComm, &dcbSerialParams);
 
+		// Set comms timeouts
 		COMMTIMEOUTS timeouts = { 0 };
 		timeouts.ReadIntervalTimeout = 50;
 		timeouts.ReadTotalTimeoutConstant = 50;
 		timeouts.ReadTotalTimeoutMultiplier = 10;
 		timeouts.WriteTotalTimeoutConstant = 50;
 		timeouts.WriteTotalTimeoutMultiplier = 10;
+		SetCommTimeouts(hComm, &timeouts);
+	}
+}
 
-		/*
+void Game::InitComms(const char* portname) {
+	bytes = 0;
+	bufEmpty = true;
+	// If the comms handle has not been created, open specified serial port for generic I/O
+	if (hComm == NULL)
+	{
+		hComm = CreateFile(portname,
+			GENERIC_READ | GENERIC_WRITE,
+			0,
+			NULL,
+			OPEN_EXISTING,
+			0,
+			NULL);
+		if (hComm == INVALID_HANDLE_VALUE)
+		{
+			window->PrintLine("Error initializing communications");
+			DWORD err = GetLastError();
+			Pause();
+		}
+		// Setup device control structure to configure comm port for serial communications
+		DCB dcbSerialParams = { 0 };
+		dcbSerialParams.DCBlength = sizeof(dcbSerialParams);
+		GetCommState(hComm, &dcbSerialParams);
+		dcbSerialParams.BaudRate = CBR_9600;
+		dcbSerialParams.ByteSize = 8;
+		dcbSerialParams.StopBits = ONESTOPBIT;
+		dcbSerialParams.Parity = NOPARITY;
+		SetCommState(hComm, &dcbSerialParams);
+
+		// Set comms timeouts
 		COMMTIMEOUTS timeouts = { 0 };
-		timeouts.ReadIntervalTimeout = MAXDWORD;
-		timeouts.ReadTotalTimeoutConstant = 0;
-		timeouts.ReadTotalTimeoutMultiplier = 0;
-		timeouts.WriteTotalTimeoutConstant = 0;
-		timeouts.WriteTotalTimeoutMultiplier = 0;
-		*/
+		timeouts.ReadIntervalTimeout = 50;
+		timeouts.ReadTotalTimeoutConstant = 50;
+		timeouts.ReadTotalTimeoutMultiplier = 10;
+		timeouts.WriteTotalTimeoutConstant = 50;
+		timeouts.WriteTotalTimeoutMultiplier = 10;
 		SetCommTimeouts(hComm, &timeouts);
 	}
 }

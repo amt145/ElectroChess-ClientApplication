@@ -1,3 +1,9 @@
+/*
+	File: Rook.cpp
+	Author: Alex Turner
+	Last Revision Date: 04/24/2020
+*/
+
 #include "Rook.h"
 
 Rook::Rook(Board::COLOR c, COORD pos, int player) : Piece('R', Piece::TYPE::ROOK, c, pos, player) {}

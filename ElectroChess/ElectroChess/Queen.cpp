@@ -1,3 +1,9 @@
+/*
+	File: Queen.cpp
+	Author: Alex Turner
+	Last Revision Date: 04/24/2020
+*/
+
 #include "Queen.h"
 
 Queen::Queen(Board::COLOR c, COORD pos, int player) : Piece('Q', Piece::TYPE::QUEEN, c, pos, player) {}
